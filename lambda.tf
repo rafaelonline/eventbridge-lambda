@@ -7,11 +7,6 @@ data "archive_file" "lambda_autotag" {
 
 ######################## LAMBDA FUNCTION ########################
 resource "aws_lambda_function" "autotag" {
-  # checkov:skip=BC_AWS_SERVERLESS_5: Lab
-  # checkov:skip=BC_AWS_GENERAL_64: Lab
-  # checkov:skip=BC_AWS_GENERAL_63: Lab
-  # checkov:skip=BC_AWS_GENERAL_65: Lab
-  # checkov:skip=BC_AWS_SERVERLESS_4: Lab
   function_name    = var.autotag_function_name
   role             = aws_iam_role.lambda_exec_role.arn
   filename         = data.archive_file.lambda_autotag.output_path
@@ -19,10 +14,10 @@ resource "aws_lambda_function" "autotag" {
   description      = var.autotag_description
   publish          = true
 
-  runtime     = "python3.8"
-  handler     = "main.lambda_handler"
-  timeout     = 300
-  memory_size = 128
+  runtime       = "python3.8"
+  handler       = "main.lambda_handler"
+  timeout       = 300
+  memory_size   = 128
   architectures = ["arm64"]
 
   environment {
@@ -35,7 +30,6 @@ resource "aws_lambda_function" "autotag" {
 
 ######################## LAMBDA LOG GROUP ########################
 resource "aws_cloudwatch_log_group" "lambda_log_grp" {
-  # checkov:skip=BC_AWS_GENERAL_85: Lab
   name              = "/aws/lambda/${var.autotag_function_name}"
   retention_in_days = 3
 }
