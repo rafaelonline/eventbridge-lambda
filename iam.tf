@@ -41,3 +41,30 @@ data "aws_iam_policy_document" "lambda_inline_policy" {
     resources = ["${aws_cloudwatch_log_group.lambda_log_grp.arn}:*"]
   }
 }
+
+######################## CLOUDTRAIL BUCKET POLICY ########################
+data "aws_iam_policy_document" "cloudtrail_bucket_policy_doc" {
+  count = var.create_trail ? 1 : 0
+
+  statement {
+    sid    = "AllowCloudTrailCheckBucketAcl"
+    effect = "Allow"
+    principals {
+      type        = "Service"
+      identifiers = ["cloudtrail.amazonaws.com"]
+    }
+    actions   = ["s3:GetBucketAcl"]
+    resources = [aws_s3_bucket.cloudtrail_bucket[count.index].arn]
+  }
+
+  statement {
+    sid    = "AllowCloudTrailWriteLogs"
+    effect = "Allow"
+    principals {
+      type        = "Service"
+      identifiers = ["cloudtrail.amazonaws.com"]
+    }
+    actions   = ["s3:PutObject"]
+    resources = ["${aws_s3_bucket.cloudtrail_bucket[count.index].arn}/AWSLogs/*"]
+  }
+}

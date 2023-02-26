@@ -5,6 +5,12 @@ variable "aws_region" {
   default     = "us-east-1"
 }
 
+variable "create_trail" {
+  description = "Set to false if a Cloudtrail trail for management events exists"
+  type        = bool
+  default     = true
+}
+
 variable "autotag_function_name" {
   description = "Name of lambda function"
   type        = string
