@@ -1,3 +1,35 @@
+# Eventos orientados com Amazon EventBridge
+
+As arquiteturas orientadas a eventos (Event-Driven) são caracterizadas por serviços que se comunicam de forma assíncrona e desacoplado através de eventos.
+
+Os serviços transmitirão eventos (Produtores) que serão consumidos e reagidos por outros serviços (Consumidores).
+
+Uma característica que marca uma Arquitetura Event-Drive é que: Produtores e consumidores estão completamente dissociados, um produtor não deve saber ou se importar com quem está consumindo seus eventos.
+
+![Event-Driven Architectures Draw](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/s8zblbucxrr1dtmtdyko.png)
+
+## O que seria o Amazon EventBridge?
+
+> O [Amazon EventBridge](https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-what-is.html) é um serviço que oferece acesso em tempo real a alterações de dados em serviços da AWS, em suas aplicações e em aplicações de software como serviço (SaaS) sem precisar escrever código. Para começar, você pode escolher uma origem de eventos no console do EventBridge. Em seguida, pode selecionar um destino entre os serviços da AWS, incluindo o AWS Lambda, o Amazon Simple Notification Service (SNS) e o Amazon Kinesis Data Firehose. O EventBridge entregará automaticamente os eventos quase em tempo real.
+
+Em resumo você pode receber, filtrar, transformar, rotear (dos Produtores) e entregar esses eventos a Consumidores.
+
+## Trabalhando com o Amazon EventBridge
+
+Para exemplificar o uso do Amazon EventBridge vamos criar o seguinte cenário:
+
+* Toda vez que uma instancia RDS for criada queremos que uma Lambda seja executada. Para nosso exemplo a Lambda irá adicionar uma tag.
+
+Utilizaremos então a seguinte arquitetura:
+
+![Event-Driven Architectures exemple](https://dev-to-uploads.s3.amazonaws.com/uploads/articles/zni56gp7j5zta4ymrppq.png)
+
+1. Como **Produtor** de eventos utilizaremos o _CloudTrail_.
+2. Como **Broker**, que irá tratar os eventos, utilizaremos o _EventBridge_
+3. Como **Consumer** desses eventos utilizaremos a _AWS Lambda_
+
+Acesse o post comeplento em [Eventos orientados com Amazon EventBridge](https://dev.to/rafaelonline/eventos-orientados-com-amazon-eventbridge-1185)
+
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 ## Requirements
 
