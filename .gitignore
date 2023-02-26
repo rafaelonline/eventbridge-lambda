@@ -29,6 +29,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+code/lambda_package.zip
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -209,3 +210,5 @@ terraform.rc
 # End of https://www.toptal.com/developers/gitignore/api/terraform,python
 
 **/.infracost/*
+
+.terraform.lock.hcl
